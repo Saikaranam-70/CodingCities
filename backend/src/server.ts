@@ -154,4 +154,11 @@ app.listen(PORT, async () => {
   console.log(`==================================================`);
 
   await checkStatsApiHealth('leetcode');
+
+  // Automatic Keep-Alive Cron Ping: Pings Stats API every 10 minutes to prevent Render free-tier sleep
+  const KEEP_ALIVE_INTERVAL_MS = 10 * 60 * 1000;
+  setInterval(async () => {
+    console.log(`⏰ [KeepAlive Cron] Ping stats API to prevent Render free-tier sleep...`);
+    await checkStatsApiHealth('leetcode');
+  }, KEEP_ALIVE_INTERVAL_MS);
 });
