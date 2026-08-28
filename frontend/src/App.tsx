@@ -8,24 +8,22 @@ import { LegendToggle } from './components/hud/LegendToggle';
 import { ErrorMessage } from './components/hud/ErrorMessage';
 import { WelcomeModal, CityViewMode, AestheticTheme } from './components/hud/WelcomeModal';
 import { CityCustomizer } from './components/hud/CityCustomizer';
+import { CompareCitiesModal } from './components/hud/CompareCitiesModal';
 import { Building2, Sparkles } from 'lucide-react';
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL 
+const API_BASE = import.meta.env.VITE_API_BASE_URL
   ? `${import.meta.env.VITE_API_BASE_URL.replace(/\/+$/, '')}/api`
   : '/api';
 
 export default function App() {
-  const [hasChosenUser, setHasChosenUser] = useState<boolean>(() => {
-    return !!localStorage.getItem('coding_cities_active_user');
-  });
+  const [hasChosenUser, setHasChosenUser] = useState<boolean>(false);
 
   const [platform, setPlatform] = useState<PlatformType>('leetcode');
-  const [username, setUsername] = useState<string>(() => {
-    return localStorage.getItem('coding_cities_active_user') || '';
-  });
+  const [username, setUsername] = useState<string>('');
 
-  const [cityMode, setCityMode] = useState<CityViewMode>('topics');
+  const [cityMode, setCityMode] = useState<CityViewMode>('daily');
   const [theme, setTheme] = useState<AestheticTheme>('cyberpunk');
+  const [showCompareModal, setShowCompareModal] = useState<boolean>(false);
 
   const [shadowsEnabled, setShadowsEnabled] = useState<boolean>(true);
   const [isNightMode, setIsNightMode] = useState<boolean>(true);
@@ -35,9 +33,9 @@ export default function App() {
   const [history, setHistory] = useState<string[]>(() => {
     try {
       const saved = localStorage.getItem(`coding_cities_history_${platform}`);
-      return saved ? JSON.parse(saved) : ['leetcode', 'neal_wu'];
+      return saved ? JSON.parse(saved) : [];
     } catch {
-      return ['leetcode'];
+      return [];
     }
   });
 
@@ -61,7 +59,7 @@ export default function App() {
         : `${API_BASE}/city/leetcode/${encodeURIComponent(targetUsername)}`;
 
       const res = await fetch(endpoint);
-      
+
       let data: any = null;
       try {
         data = await res.json();
@@ -137,8 +135,19 @@ export default function App() {
           activePlatform={platform}
           onPlatformChange={(newPlat) => setPlatform(newPlat)}
           onSearch={(user, plat) => fetchCity(user, plat)}
+          onOpenCompare={() => setShowCompareModal(true)}
           isLoading={isLoading}
           history={history}
+        />
+      )}
+
+      {/* Compare Cities Modal */}
+      {showCompareModal && scene && (
+        <CompareCitiesModal
+          currentScene={scene}
+          activePlatform={platform}
+          onClose={() => setShowCompareModal(false)}
+          apiBase={API_BASE}
         />
       )}
 

@@ -7,9 +7,24 @@ export interface DistrictData {
   color: string;
 }
 
+export type BuildingArchetype = 
+  | 'glass_tower'
+  | 'retail_row'
+  | 'gabled_house'
+  | 'warehouse'
+  | 'landmark_tower'
+  | 'apartment_block';
+
 export interface BuildingData {
   id: string;
   topic: string;
+  repoName?: string;
+  language?: string;
+  stars?: number;
+  commitsCount?: number;
+  lastActiveDate?: string;
+  litWindowsRatio?: number;
+  archetype?: BuildingArchetype;
   difficulty: 'easy' | 'medium' | 'hard';
   height: number;
   width: number;

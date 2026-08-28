@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, Sparkles, History, Code2, Github } from 'lucide-react';
+import { Search, Sparkles, History, Code2, Github, ArrowRightLeft } from 'lucide-react';
 
 export type PlatformType = 'leetcode' | 'github';
 
@@ -8,6 +8,7 @@ interface HeaderControlsProps {
   activePlatform: PlatformType;
   onPlatformChange: (platform: PlatformType) => void;
   onSearch: (username: string, platform?: PlatformType) => void;
+  onOpenCompare?: () => void;
   isLoading: boolean;
   history: string[];
 }
@@ -17,6 +18,7 @@ export const HeaderControls: React.FC<HeaderControlsProps> = ({
   activePlatform,
   onPlatformChange,
   onSearch,
+  onOpenCompare,
   isLoading,
   history
 }) => {
@@ -45,15 +47,15 @@ export const HeaderControls: React.FC<HeaderControlsProps> = ({
           <h1 className="font-extrabold text-base tracking-tight text-white flex items-center gap-2">
             Coding Cities
             <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-400 border border-blue-500/30">
-              3D Metropolis
+              Isometric Vector
             </span>
           </h1>
           <p className="text-[10px] text-slate-400 font-medium">
-            3D Developer Stats Visualizer
+            Developer Contribution Metropolis
           </p>
         </div>
 
-        {/* Platform Selector Tabs & New Search button */}
+        {/* Platform Selector Tabs, Compare Button & New Search button */}
         <div className="flex items-center gap-2 ml-2">
           <div className="flex items-center gap-1 bg-slate-900/80 p-1 rounded-xl border border-white/10">
             <button
@@ -63,11 +65,10 @@ export const HeaderControls: React.FC<HeaderControlsProps> = ({
                 setInputVal(firstPreset);
                 onSearch(firstPreset, 'leetcode');
               }}
-              className={`flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold transition-all ${
-                activePlatform === 'leetcode'
+              className={`flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold transition-all ${activePlatform === 'leetcode'
                   ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md'
                   : 'text-slate-400 hover:text-slate-200'
-              }`}
+                }`}
             >
               <Code2 className="w-3.5 h-3.5" />
               <span>LeetCode</span>
@@ -80,16 +81,25 @@ export const HeaderControls: React.FC<HeaderControlsProps> = ({
                 setInputVal(firstPreset);
                 onSearch(firstPreset, 'github');
               }}
-              className={`flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold transition-all ${
-                activePlatform === 'github'
+              className={`flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold transition-all ${activePlatform === 'github'
                   ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-md'
                   : 'text-slate-400 hover:text-slate-200'
-              }`}
+                }`}
             >
               <Github className="w-3.5 h-3.5" />
               <span>GitHub</span>
             </button>
           </div>
+
+          {onOpenCompare && (
+            <button
+              onClick={onOpenCompare}
+              className="px-3 py-1.5 rounded-xl bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-500 hover:to-rose-500 text-white text-[11px] font-bold transition-all flex items-center gap-1 shadow-lg shadow-pink-500/20"
+              title="Compare Two Cities"
+            >
+              <ArrowRightLeft className="w-3.5 h-3.5" /> Compare
+            </button>
+          )}
 
           <button
             onClick={() => onSearch('')}

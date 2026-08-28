@@ -17,7 +17,7 @@ interface WelcomeModalProps {
 export const WelcomeModal: React.FC<WelcomeModalProps> = ({ onGenerate }) => {
   const [platform, setPlatform] = useState<PlatformType>('leetcode');
   const [username, setUsername] = useState<string>('');
-  const [mode, setMode] = useState<CityViewMode>('topics');
+  const [mode, setMode] = useState<CityViewMode>('daily');
   const [theme, setTheme] = useState<AestheticTheme>('cyberpunk');
   const [errorMsg, setErrorMsg] = useState<string>('');
 
@@ -68,15 +68,14 @@ export const WelcomeModal: React.FC<WelcomeModalProps> = ({ onGenerate }) => {
                   setPlatform('leetcode');
                   setUsername('');
                 }}
-                className={`p-3 rounded-2xl border text-left flex items-center gap-3 transition-all ${
-                  platform === 'leetcode'
+                className={`p-3 rounded-2xl border text-left flex items-center gap-3 transition-all ${platform === 'leetcode'
                     ? 'bg-blue-600/30 border-blue-500 text-white shadow-lg shadow-blue-500/20'
                     : 'bg-slate-900/50 border-white/10 text-slate-400 hover:text-slate-200'
-                }`}
+                  }`}
               >
                 <Code2 className="w-5 h-5 text-blue-400" />
                 <div>
-                  <div className="text-xs font-bold">LeetCode City</div>
+                  <div className="text-xs font-bold">LeetCode Coding City</div>
                   <div className="text-[10px] text-slate-400">Problem solving stats</div>
                 </div>
               </button>
@@ -87,15 +86,14 @@ export const WelcomeModal: React.FC<WelcomeModalProps> = ({ onGenerate }) => {
                   setPlatform('github');
                   setUsername('');
                 }}
-                className={`p-3 rounded-2xl border text-left flex items-center gap-3 transition-all ${
-                  platform === 'github'
+                className={`p-3 rounded-2xl border text-left flex items-center gap-3 transition-all ${platform === 'github'
                     ? 'bg-purple-600/30 border-purple-500 text-white shadow-lg shadow-purple-500/20'
                     : 'bg-slate-900/50 border-white/10 text-slate-400 hover:text-slate-200'
-                }`}
+                  }`}
               >
                 <Github className="w-5 h-5 text-purple-400" />
                 <div>
-                  <div className="text-xs font-bold">GitHub City</div>
+                  <div className="text-xs font-bold">GitHub Coding City</div>
                   <div className="text-[10px] text-slate-400">Repos & commits stats</div>
                 </div>
               </button>
@@ -141,11 +139,10 @@ export const WelcomeModal: React.FC<WelcomeModalProps> = ({ onGenerate }) => {
               <button
                 type="button"
                 onClick={() => setMode('topics')}
-                className={`p-3 rounded-2xl border text-left flex items-start gap-2.5 transition-all ${
-                  mode === 'topics'
+                className={`p-3 rounded-2xl border text-left flex items-start gap-2.5 transition-all ${mode === 'topics'
                     ? 'bg-gradient-to-r from-blue-600/30 to-indigo-600/30 border-blue-400 text-white'
                     : 'bg-slate-900/50 border-white/10 text-slate-400 hover:text-slate-200'
-                }`}
+                  }`}
               >
                 <Building2 className="w-4 h-4 text-blue-400 mt-0.5" />
                 <div>
@@ -157,11 +154,10 @@ export const WelcomeModal: React.FC<WelcomeModalProps> = ({ onGenerate }) => {
               <button
                 type="button"
                 onClick={() => setMode('daily')}
-                className={`p-3 rounded-2xl border text-left flex items-start gap-2.5 transition-all ${
-                  mode === 'daily'
+                className={`p-3 rounded-2xl border text-left flex items-start gap-2.5 transition-all ${mode === 'daily'
                     ? 'bg-gradient-to-r from-emerald-600/30 to-teal-600/30 border-emerald-400 text-white'
                     : 'bg-slate-900/50 border-white/10 text-slate-400 hover:text-slate-200'
-                }`}
+                  }`}
               >
                 <Calendar className="w-4 h-4 text-emerald-400 mt-0.5" />
                 <div>
@@ -187,11 +183,10 @@ export const WelcomeModal: React.FC<WelcomeModalProps> = ({ onGenerate }) => {
                   type="button"
                   key={t.id}
                   onClick={() => setTheme(t.id as AestheticTheme)}
-                  className={`py-2 px-2 rounded-xl text-center border text-xs font-bold transition-all ${
-                    theme === t.id
+                  className={`py-2 px-2 rounded-xl text-center border text-xs font-bold transition-all ${theme === t.id
                       ? `bg-gradient-to-r ${t.color} text-white border-white/40 shadow-lg`
                       : 'bg-slate-900/50 border-white/10 text-slate-400 hover:text-slate-200'
-                  }`}
+                    }`}
                 >
                   {t.label}
                 </button>
