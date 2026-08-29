@@ -66,15 +66,13 @@ export const HeaderControls: React.FC<HeaderControlsProps> = ({
                   onSearch(targetUser, 'leetcode');
                 }
               }}
-              className={`flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold transition-all ${activePlatform === 'leetcode'
-                  ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md'
-                  : 'text-slate-400 hover:text-slate-200'
-                }`}
+              className="flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold transition-all bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md"
             >
               <Code2 className="w-3.5 h-3.5" />
-              <span>LeetCode</span>
+              <span>LeetCode City</span>
             </button>
 
+            {/* GitHub Platform Option Disabled/Commented Out:
             <button
               onClick={() => {
                 onPlatformChange('github');
@@ -91,6 +89,7 @@ export const HeaderControls: React.FC<HeaderControlsProps> = ({
               <Github className="w-3.5 h-3.5" />
               <span>GitHub</span>
             </button>
+            */}
           </div>
 
           {onOpenCompare && (

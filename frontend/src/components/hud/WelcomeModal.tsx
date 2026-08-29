@@ -56,30 +56,28 @@ export const WelcomeModal: React.FC<WelcomeModalProps> = ({ onGenerate }) => {
         </div>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-          {/* Step 1: Select Platform */}
+          {/* Step 1: Select Platform (GitHub Option Temporarily Commented Out) */}
           <div>
             <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
-              1. Choose Developer Platform
+              1. Developer Platform
             </label>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 gap-3">
               <button
                 type="button"
                 onClick={() => {
                   setPlatform('leetcode');
                   setUsername('');
                 }}
-                className={`p-3 rounded-2xl border text-left flex items-center gap-3 transition-all ${platform === 'leetcode'
-                    ? 'bg-blue-600/30 border-blue-500 text-white shadow-lg shadow-blue-500/20'
-                    : 'bg-slate-900/50 border-white/10 text-slate-400 hover:text-slate-200'
-                  }`}
+                className="p-3 rounded-2xl border border-blue-500 bg-blue-600/30 text-white shadow-lg shadow-blue-500/20 text-left flex items-center gap-3 transition-all"
               >
                 <Code2 className="w-5 h-5 text-blue-400" />
                 <div>
                   <div className="text-xs font-bold">LeetCode Coding City</div>
-                  <div className="text-[10px] text-slate-400">Problem solving stats</div>
+                  <div className="text-[10px] text-slate-400">Problem solving stats & algorithm skylines</div>
                 </div>
               </button>
 
+              {/* GitHub Option Disabled/Commented Out:
               <button
                 type="button"
                 onClick={() => {
@@ -97,6 +95,7 @@ export const WelcomeModal: React.FC<WelcomeModalProps> = ({ onGenerate }) => {
                   <div className="text-[10px] text-slate-400">Repos & commits stats</div>
                 </div>
               </button>
+              */}
             </div>
           </div>
 
