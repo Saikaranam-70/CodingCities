@@ -45,13 +45,13 @@ export const WelcomeModal: React.FC<WelcomeModalProps> = ({ onGenerate }) => {
             🏙️
           </div>
           <h1 className="text-2xl font-black tracking-tight text-white flex items-center justify-center gap-2">
-            Coding Cities
+            LeetCode City
             <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-blue-500/20 text-blue-400 border border-blue-500/30">
               3D Visualizer
             </span>
           </h1>
           <p className="text-xs text-slate-300 mt-1 font-medium">
-            Transform your developer profile into an interactive 3D metropolis
+            Transform your LeetCode profile into an interactive 3D metropolis
           </p>
         </div>
 

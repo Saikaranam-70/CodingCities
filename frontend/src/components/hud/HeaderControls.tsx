@@ -45,13 +45,13 @@ export const HeaderControls: React.FC<HeaderControlsProps> = ({
         </div>
         <div>
           <h1 className="font-extrabold text-base tracking-tight text-white flex items-center gap-2">
-            Coding Cities
+            LeetCode City
             <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-400 border border-blue-500/30">
               Isometric Vector
             </span>
           </h1>
           <p className="text-[10px] text-slate-400 font-medium">
-            Developer Contribution Metropolis
+            LeetCode Contribution Metropolis
           </p>
         </div>
 
