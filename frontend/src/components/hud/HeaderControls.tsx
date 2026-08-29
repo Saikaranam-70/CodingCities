@@ -61,9 +61,10 @@ export const HeaderControls: React.FC<HeaderControlsProps> = ({
             <button
               onClick={() => {
                 onPlatformChange('leetcode');
-                const firstPreset = presetProfiles.leetcode[0];
-                setInputVal(firstPreset);
-                onSearch(firstPreset, 'leetcode');
+                const targetUser = inputVal.trim() || currentUsername;
+                if (targetUser) {
+                  onSearch(targetUser, 'leetcode');
+                }
               }}
               className={`flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold transition-all ${activePlatform === 'leetcode'
                   ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md'
@@ -77,9 +78,10 @@ export const HeaderControls: React.FC<HeaderControlsProps> = ({
             <button
               onClick={() => {
                 onPlatformChange('github');
-                const firstPreset = presetProfiles.github[0];
-                setInputVal(firstPreset);
-                onSearch(firstPreset, 'github');
+                const targetUser = inputVal.trim() || currentUsername;
+                if (targetUser) {
+                  onSearch(targetUser, 'github');
+                }
               }}
               className={`flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold transition-all ${activePlatform === 'github'
                   ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-md'
