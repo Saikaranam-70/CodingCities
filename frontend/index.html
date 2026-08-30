@@ -3,20 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏙️</text></svg>" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
 
-    <!-- SEO Title Tag -->
+    <!-- God Level SEO Title Tag -->
     <title>LeetCode City — 3D LeetCode Stats & 365-Day Contribution Visualizer</title>
 
     <!-- Meta Search Engine Tags -->
-    <meta name="description" content="Transform your LeetCode profile into a breathtaking, interactive 3D 365-day contribution city. Visualize solved problem stats, daily streaks, algorithm skylines, and coding progress in 3D." />
-    <meta name="keywords" content="LeetCode City, LeetCode 3D, LeetCode Stats Visualizer, 3D LeetCode Portfolio, 365 Day Contribution Heatmap, LeetCode Skyline, Algorithm Visualizer, Software Engineer Portfolio, LeetCode Digital Twin" />
+    <meta name="description" content="Transform your LeetCode profile into a breathtaking, interactive 3D 365-day contribution city. Visualize solved problem stats, daily streaks, algorithm skylines, data structure districts, and coding progress in 3D." />
+    <meta name="keywords" content="LeetCode City, LeetCode 3D, LeetCode Stats Visualizer, 3D LeetCode Portfolio, 365 Day Contribution Heatmap, LeetCode Skyline, Algorithm Visualizer, Software Engineer Portfolio, LeetCode Digital Twin, Coding Cities, 3D Code Matrix" />
     <meta name="author" content="LeetCode City" />
+    <meta name="publisher" content="LeetCode City" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large" />
     <meta name="theme-color" content="#0F172A" />
 
-    <!-- Canonical URL -->
+    <!-- Canonical URL & Manifest -->
     <link rel="canonical" href="https://leetcodecity.com/" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <!-- Open Graph (OG) / Social Media Meta Tags -->
     <meta property="og:type" content="website" />
@@ -27,34 +30,52 @@
     <meta property="og:image" content="https://leetcodecity.com/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="LeetCode City 3D Interactive Visualizer" />
     <meta property="og:locale" content="en_US" />
 
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@LeetCodeCity" />
+    <meta name="twitter:creator" content="@LeetCodeCity" />
     <meta name="twitter:title" content="LeetCode City — 3D LeetCode Stats & 365-Day Contribution Visualizer" />
     <meta name="twitter:description" content="Turn your LeetCode profile into an interactive 3D 365-day contribution city and algorithm skyline." />
     <meta name="twitter:image" content="https://leetcodecity.com/og-image.png" />
 
-    <!-- Preconnect Fonts -->
+    <!-- Preconnect & Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-    <!-- Structured Data (JSON-LD Schema.org) -->
+    <!-- Structured Data 1: WebSite SearchAction Schema -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "WebApplication",
+      "@type": "WebSite",
       "name": "LeetCode City",
-      "alternateName": ["LeetCodeCity", "LeetCode City 3D"],
+      "alternateName": ["LeetCodeCity", "Coding Cities"],
       "url": "https://leetcodecity.com/",
-      "description": "Interactive 3D developer portfolio and statistics visualizer for LeetCode profiles. Generate 3D 365-day contribution grids and topic skyscrapers.",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://leetcodecity.com/?u={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
+    <!-- Structured Data 2: SoftwareApplication Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "LeetCode City",
       "applicationCategory": "DeveloperApplication",
       "operatingSystem": "All",
+      "url": "https://leetcodecity.com/",
+      "description": "Interactive 3D developer portfolio and statistics visualizer for LeetCode profiles. Generate 3D 365-day contribution grids and topic skyscrapers.",
       "browserRequirements": "Requires WebGL enabled browser",
       "offers": {
         "@type": "Offer",
-        "price": "0",
+        "price": "0.00",
         "priceCurrency": "USD"
       },
       "featureList": [
@@ -63,6 +84,22 @@
         "Interactive Camera Orbit, Focus & Zoom Controls",
         "Algorithm Topic & Skyscraper District Breakdown",
         "Developer Contest Ranking & Activity Density Analytics"
+      ]
+    }
+    </script>
+
+    <!-- Structured Data 3: BreadcrumbList Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://leetcodecity.com/"
+        }
       ]
     }
     </script>
@@ -76,7 +113,7 @@
         <h2>Key Features of LeetCode City</h2>
         <ul>
           <li><strong>365-Day Daily Contribution Grid</strong>: Visualize all 365 days of activity as 3D contribution towers.</li>
-          <li><strong>LeetCode Profile Integration</strong>: Connect problem solving and submission history.</li>
+          <li><strong>LeetCode Profile Integration</strong>: Connect problem solving and submission history seamlessly.</li>
           <li><strong>Topic Skyscrapers & Districts</strong>: Group skyscrapers by data structures and algorithm topics.</li>
           <li><strong>Interactive 3D Controls</strong>: Orbit, pan, zoom, and focus on individual problem towers.</li>
         </ul>
