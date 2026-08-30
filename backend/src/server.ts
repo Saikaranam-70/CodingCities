@@ -112,8 +112,8 @@ const handleLeetCodeRequest = async (req: Request, res: Response) => {
     });
   }
 
-  const username = rawUsername.trim().toLowerCase();
-  const cacheKey = `leetcode:${username}:city`;
+  const username = rawUsername.trim();
+  const cacheKey = `leetcode:${username.toLowerCase()}:city`;
 
   try {
     const cachedData = await getCache(cacheKey);

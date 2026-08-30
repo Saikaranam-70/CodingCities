@@ -37,6 +37,62 @@ async function fetchEndpoint<T>(baseUrl: string, endpoint: string): Promise<T> {
 }
 
 /**
+ * Direct GraphQL fetch from official LeetCode API as a high-reliability fallback
+ */
+async function fetchDirectLeetCodeGraphQL(username: string): Promise<any> {
+  try {
+    const response = await fetch('https://leetcode.com/graphql', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Referer': `https://leetcode.com/${encodeURIComponent(username)}/`
+      },
+      body: JSON.stringify({
+        query: `
+          query getUserProfile($username: String!) {
+            matchedUser(username: $username) {
+              username
+              profile {
+                ranking
+                reputation
+              }
+              submitStats {
+                acSubmissionNum {
+                  difficulty
+                  count
+                  submissions
+                }
+                totalSubmissionNum {
+                  difficulty
+                  count
+                  submissions
+                }
+              }
+              userCalendar {
+                activeYears
+                streak
+                totalActiveDays
+                submissionCalendar
+              }
+            }
+          }
+        `,
+        variables: { username }
+      }),
+      timeout: 10000
+    } as any);
+
+    if (!response.ok) return null;
+    const json = await response.json();
+    return json?.data?.matchedUser || null;
+  } catch (err: any) {
+    console.warn(`[LeetCodeGraphQL] Direct fetch failed for '${username}': ${err.message}`);
+    return null;
+  }
+}
+
+/**
  * Probes the stats API health on server boot
  */
 export async function checkStatsApiHealth(testUsername: string = 'leetcode'): Promise<boolean> {
@@ -61,7 +117,7 @@ export async function checkStatsApiHealth(testUsername: string = 'leetcode'): Pr
 }
 
 /**
- * Fetches all user statistics in parallel from your deployed stats API
+ * Fetches all user statistics in parallel with official LeetCode GraphQL fallback
  */
 export async function fetchRawLeetCodeData(username: string): Promise<RawLeetCodeData> {
   const baseUrl = getStatsApiUrl();
@@ -75,15 +131,49 @@ export async function fetchRawLeetCodeData(username: string): Promise<RawLeetCod
     fetchEndpoint<any>(baseUrl, `${username}/contest`)
   ]);
 
-  // Check if user genuinely does not exist or has no solved stats
-  const isNotFound = solved?.errors || (solved?.solvedProblem === undefined && solved?.totalSolved === undefined && !solved?.easySolved);
-  if (isNotFound && (!calendar || Object.keys(calendar).length === 0)) {
-    throw new Error('USER_NOT_FOUND');
+  // Check if primary API returned invalid user
+  const isPrimaryNotFound = solved?.errors === 'User not found' || solved?.errors === 'user does not exist';
+  const hasPrimaryData = solved && (solved.solvedProblem !== undefined || solved.totalSolved !== undefined || solved.easySolved !== undefined);
+
+  if (!hasPrimaryData || isPrimaryNotFound) {
+    console.log(`🌐 [LeetCodeFetcher] Primary stats API missing data for '${username}'. Trying direct LeetCode GraphQL...`);
+    const directUser = await fetchDirectLeetCodeGraphQL(username);
+
+    if (directUser) {
+      const acNums = directUser.submitStats?.acSubmissionNum || [];
+      const easyItem = acNums.find((i: any) => i.difficulty === 'Easy');
+      const mediumItem = acNums.find((i: any) => i.difficulty === 'Medium');
+      const hardItem = acNums.find((i: any) => i.difficulty === 'Hard');
+      const allItem = acNums.find((i: any) => i.difficulty === 'All');
+
+      return {
+        username,
+        solved: {
+          solvedProblem: allItem?.count ?? 0,
+          easySolved: easyItem?.count ?? 0,
+          mediumSolved: mediumItem?.count ?? 0,
+          hardSolved: hardItem?.count ?? 0,
+          totalSolved: allItem?.count ?? 0,
+          ranking: directUser.profile?.ranking ?? 500000,
+          acSubmissionNum: directUser.submitStats?.acSubmissionNum || [],
+          totalSubmissionNum: directUser.submitStats?.totalSubmissionNum || []
+        },
+        calendar: directUser.userCalendar || {},
+        skill: {},
+        language: {},
+        badges: {},
+        contest: {}
+      };
+    }
+
+    if (isPrimaryNotFound) {
+      throw new Error('USER_NOT_FOUND');
+    }
   }
 
   return {
     username,
-    solved: solved || {},
+    solved: solved || { solvedProblem: 0, easySolved: 0, mediumSolved: 0, hardSolved: 0, totalSolved: 0 },
     calendar: calendar || {},
     skill: skill || {},
     language: language || {},
