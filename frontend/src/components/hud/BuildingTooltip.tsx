@@ -30,7 +30,7 @@ export const BuildingTooltip: React.FC<BuildingTooltipProps> = ({ building }) =>
   const archetypeLabel = (archetype && archetypeMap[archetype]) || 'Repository Building';
 
   return (
-    <div className="pointer-events-none z-50 min-w-[220px] max-w-[280px] bg-slate-900/95 backdrop-blur-md border border-slate-700/80 rounded-2xl p-3.5 shadow-2xl text-slate-100 font-sans transform -translate-y-2 transition-all duration-200">
+    <div className="pointer-events-none z-50 min-w-[200px] max-w-[calc(100vw-2rem)] sm:max-w-[280px] bg-slate-900/95 backdrop-blur-md border border-slate-700/80 rounded-2xl p-3 sm:p-3.5 shadow-2xl text-slate-100 font-sans transform -translate-y-2 transition-all duration-200">
       {/* Header Badge */}
       <div className="flex items-center justify-between gap-2 mb-2">
         <span

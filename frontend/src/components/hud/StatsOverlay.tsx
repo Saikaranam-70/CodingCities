@@ -9,7 +9,9 @@ interface StatsOverlayProps {
 }
 
 export const StatsOverlay: React.FC<StatsOverlayProps> = ({ scene, activePlatform }) => {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(() => {
+    return typeof window !== 'undefined' ? window.innerWidth < 768 : false;
+  });
 
   const {
     username,
@@ -32,17 +34,18 @@ export const StatsOverlay: React.FC<StatsOverlayProps> = ({ scene, activePlatfor
 
   return (
     <div
-      className={`absolute left-4 top-24 z-30 transition-all duration-300 pointer-events-auto ${
+      className={`absolute left-2 sm:left-4 top-32 lg:top-24 z-30 transition-all duration-300 pointer-events-auto ${
         collapsed ? '-translate-x-[calc(100%-2.5rem)]' : 'translate-x-0'
       }`}
     >
-      <div className="relative glass-panel rounded-2xl p-4 w-72 max-h-[calc(100vh-8rem)] overflow-y-auto shadow-2xl flex flex-col gap-4">
+      <div className="relative glass-panel rounded-2xl p-3.5 sm:p-4 w-[calc(100vw-2.5rem)] max-w-[280px] sm:w-72 max-h-[calc(100vh-10rem)] sm:max-h-[calc(100vh-8rem)] overflow-y-auto shadow-2xl flex flex-col gap-3.5 sm:gap-4 no-scrollbar">
         {/* Collapse toggle button */}
         <button
           onClick={() => setCollapsed(!collapsed)}
-          className="absolute -right-3 top-4 w-6 h-6 rounded-full glass-panel flex items-center justify-center text-slate-300 hover:text-white shadow-lg border border-white/20"
+          className="absolute -right-3.5 top-4 w-7 h-7 sm:w-6 sm:h-6 rounded-full glass-panel flex items-center justify-center text-slate-300 hover:text-white shadow-lg border border-white/20 transition-all"
+          title={collapsed ? "Expand Stats" : "Collapse Stats"}
         >
-          {collapsed ? <ChevronRight className="w-3.5 h-3.5" /> : <ChevronLeft className="w-3.5 h-3.5" />}
+          {collapsed ? <ChevronRight className="w-4 h-4 sm:w-3.5 sm:h-3.5 text-blue-400" /> : <ChevronLeft className="w-4 h-4 sm:w-3.5 sm:h-3.5" />}
         </button>
 
         {/* User Badge Header */}

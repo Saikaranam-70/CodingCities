@@ -34,17 +34,17 @@ export const CityCustomizer: React.FC<CityCustomizerProps> = ({
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="absolute top-20 right-4 z-40 flex flex-col items-end pointer-events-auto">
+    <div className="absolute top-32 lg:top-20 right-2 sm:right-4 z-40 flex flex-col items-end pointer-events-auto">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="glass-panel px-3.5 py-2 rounded-2xl flex items-center gap-2 text-xs font-bold text-slate-200 hover:text-white shadow-xl border border-white/20 transition-all"
+        className="glass-panel px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-2xl flex items-center gap-1.5 sm:gap-2 text-xs font-bold text-slate-200 hover:text-white shadow-xl border border-white/20 transition-all"
       >
-        <Sliders className="w-4 h-4 text-blue-400" />
+        <Sliders className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-400" />
         <span>City Options</span>
       </button>
 
       {isOpen && (
-        <div className="glass-panel mt-2 p-4 rounded-3xl w-64 shadow-2xl border border-white/15 flex flex-col gap-4">
+        <div className="glass-panel mt-2 p-3.5 sm:p-4 rounded-3xl w-[calc(100vw-1.5rem)] max-w-xs sm:w-64 max-h-[calc(100vh-10rem)] overflow-y-auto no-scrollbar shadow-2xl border border-white/15 flex flex-col gap-3.5 sm:gap-4">
           {/* Mode Selector */}
           <div>
             <div className="text-[11px] font-bold uppercase text-slate-400 tracking-wider mb-2 flex items-center gap-1.5">

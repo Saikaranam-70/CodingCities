@@ -48,47 +48,47 @@ export const CompareCitiesModal: React.FC<CompareCitiesModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-fade-in font-sans">
-      <div className="relative w-full max-w-4xl bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-2xl overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-950/80 backdrop-blur-md animate-fade-in font-sans overflow-y-auto">
+      <div className="relative w-full max-w-4xl bg-slate-900 border border-slate-800 rounded-3xl p-4 sm:p-6 shadow-2xl overflow-y-auto max-h-[90vh] no-scrollbar my-auto">
         {/* Header */}
-        <div className="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-pink-500 to-rose-600 flex items-center justify-center text-white shadow-lg shadow-pink-500/20">
-              <ArrowRightLeft className="w-5 h-5" />
+        <div className="flex items-center justify-between border-b border-slate-800 pb-3 sm:pb-4 mb-4 sm:mb-6">
+          <div className="flex items-center gap-2.5 sm:gap-3">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-2xl bg-gradient-to-tr from-pink-500 to-rose-600 flex items-center justify-center text-white shadow-lg shadow-pink-500/20 shrink-0">
+              <ArrowRightLeft className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
             <div>
-              <h2 className="text-lg font-bold text-white flex items-center gap-2">
-                Compare Coding Cities <Sparkles className="w-4 h-4 text-pink-400" />
+              <h2 className="text-base sm:text-lg font-bold text-white flex items-center gap-1.5 sm:gap-2">
+                Compare Coding Cities <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-pink-400" />
               </h2>
-              <p className="text-xs text-slate-400">
+              <p className="text-[11px] sm:text-xs text-slate-400">
                 Compare two developers' generative isometric cities side-by-side.
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition"
+            className="p-1.5 sm:p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Search Bar for Rival User */}
-        <form onSubmit={handleFetchCompare} className="flex gap-3 mb-6">
+        <form onSubmit={handleFetchCompare} className="flex flex-col sm:flex-row gap-2.5 sm:gap-3 mb-4 sm:mb-6">
           <div className="relative flex-1">
             <Search className="absolute left-3.5 top-3 w-4 h-4 text-slate-500" />
             <input
               type="text"
-              placeholder={`Enter rival ${activePlatform === 'github' ? 'GitHub' : 'LeetCode'} username...`}
+              placeholder={`Enter rival LeetCode handle...`}
               value={targetUser}
               onChange={(e) => setTargetUser(e.target.value)}
-              className="w-full bg-slate-800/80 border border-slate-700 rounded-2xl pl-10 pr-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-pink-500"
+              className="w-full bg-slate-800/80 border border-slate-700 rounded-2xl pl-10 pr-4 py-2.5 text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-pink-500"
             />
           </div>
           <button
             type="submit"
             disabled={loading}
-            className="px-6 py-2.5 rounded-2xl bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-500 hover:to-rose-500 text-white font-semibold text-sm shadow-lg shadow-pink-500/25 transition disabled:opacity-50"
+            className="px-5 sm:px-6 py-2.5 rounded-2xl bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-500 hover:to-rose-500 text-white font-semibold text-xs sm:text-sm shadow-lg shadow-pink-500/25 transition disabled:opacity-50"
           >
             {loading ? 'Comparing...' : 'Compare'}
           </button>
